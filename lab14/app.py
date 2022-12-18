@@ -104,7 +104,6 @@ def edite(idr):
         manufacturer = request.form['manufacturer']
         price = request.form['price']
         photo = request.files['photo']
-        print(type)
 
         engine = create_engine("sqlite:///instance/base.db", echo=True)
         meta = MetaData(engine)
@@ -134,27 +133,10 @@ def edite(idr):
 # def delete - УДАЛЕНИЕ КАРТОЧЕК !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 @app.route('/delete/<int:id>/del')
 def delete(id):
-    print('happy')
     u = db.session.get(Products, id)
     db.session.delete(u)
     db.session.commit()
     return redirect('/')
-
-@app.route('/db/base')
-def base():
-    engine = create_engine("sqlite:///instance/base.db", echo=True)
-    meta = MetaData(engine)
-    products = Table("Products", meta, autoload=True)
-    conn = engine.connect()
-
-    s = products.select()
-    result = conn.execute(s)
-    for raw in result:
-        print(raw)
-    return("base.html")
-
-
-
 
 
 
