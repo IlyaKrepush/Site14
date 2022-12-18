@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Home page{% endblock %}
+{% block content %}
+{% for i in products %}
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="/static/{{i.photo}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{i.name}}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Производитель: {{i.manufacturer}}</li>
+          <li class="list-group-item">цена: {{i.price}}₽</li>
+        </ul>
+        <div class="card-body">
+          <a href="/{{i.id}}" class="btn btn-primary" class="card-link">Подробнее</a>
+        </div>
+        <div clas="flex-container" style="height:3rem;">
+        <a  href = "/delete/{{i.id}}/del" class="btn btn-danger" value="" >X</a>
+        <a  href = "/edit/{{i.id}}/ed" class="btn btn-warning" value="" >Редактирование</a>
+        </div>
+       </div>
+{%endfor%}
+{% endblock %}
